@@ -29,13 +29,12 @@ public class Config {
         @Autowired Environment env;
 
         @Bean
-        String passwordPrefix() {
-            final String[] profiles = env.getActiveProfiles();
-            List devProfiles = Arrays.asList("develop");
-            final long count = Arrays.asList(profiles).stream().filter(x -> devProfiles.contains(x))
-                    .count();
-            return count > 0 ? "{noop}" : "{bcrypt}";
+        PasswordEncoder passwordEncoder() {
+            return PasswordEncoderFactories.createDelegatingPasswordEncoder();
         }
+
+
+
     }
 
     @EnableWebSecurity
@@ -82,15 +81,4 @@ public class Config {
         public void addViewControllers (ViewControllerRegistry registry) {
         }
     }
-
-    class AuthorizationServerConfig {
-        @Bean Map<String, ClientModel> oauthClients() {
-            final Map<String, ClientModel> map = new HashMap<>();
-            final ClientModel client1 = new ClientModel("client1", "{noop}client1", "all", "http://localhost:8081/hello");
-            map.put("client1", client1);
-            return map;
-        }
-
-    }
-
 }

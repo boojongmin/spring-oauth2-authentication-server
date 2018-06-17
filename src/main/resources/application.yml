@@ -22,11 +22,14 @@ spring:
   h2:
     console:
       enabled: true
+  redis:
+    url: redis://localhost:6379
 logging:
   level:
     root: error
     org.springframework: error
-
+project:
+  password-prefix: '{noop}'
 
 ---
 spring:

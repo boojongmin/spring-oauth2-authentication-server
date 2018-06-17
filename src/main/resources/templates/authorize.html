@@ -15,7 +15,7 @@
             <br/>
             <span th:text="#{oauth2.authorize.allow_message}"/>
             <br/>
-            <form method="post" th:action="@{/authorize/submit}">
+            <form method="post" th:action="@{/oauth/authorize/submit}">
                 <ul>
                     <li th:each="scope : ${scopes}">
                         <span th:if="${scope == 'all'}" th:text="#{oauth2.scope.all}"></span>
@@ -24,8 +24,10 @@
 
                 <input th:each="scope : ${scopes}" type="text" name="scopes" th:value="${scope}" readonly="readonly"/>
                 <p/>
+                <input type="text" name="client_id" th:value="${clientId}" />
                 <input type="text" name="redirect_uri" th:value="${redirect_uri}" />
                 <input type="text" name="response_type" th:value="${response_type}" />
+                <input type="text" name="scope" th:value="${scope}" />
                 <input type="submit" value="확인"></form>
             </form>
         </div>
