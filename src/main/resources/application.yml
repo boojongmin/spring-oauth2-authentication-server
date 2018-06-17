@@ -1,0 +1,41 @@
+spring:
+  security:
+    user:
+      name: asdf
+      password: asdf
+      roles: ADMIN
+  messages:
+#    always-use-message-format: false
+    encoding: UTF-8
+    basename: messages/messages
+    cache-duration: 10s
+    fallback-to-system-locale: false
+    use-code-as-default-message: true
+  datasource:
+    url: jdbc:h2:mem:test
+    username: sa
+    password:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+  h2:
+    console:
+      enabled: true
+logging:
+  level:
+    root: error
+    org.springframework: error
+
+
+---
+spring:
+  profiles: develop
+project:
+  password-prefix: '{noop}'
+
+---
+spring:
+  profiles: production
+project:
+  password-prefix: '{bcrypt}'
